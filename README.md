@@ -1,33 +1,62 @@
 WeBWorK_Vagrant
 ===============
 
-vagrant files for WeBWorK development
+vagrant files for WeBWorK. 
+
+These abbreviated
+instructions work for unix and mac boxes. For Windows some modifications are required.
+
+* First install VirtualBox and Vagrant
+*  http://vagrantup.com for instructions
 
 To set up with a prebuilt box:
 
 ```
-git clone https://github.com/whytheplatypus/WeBWorK_Vagrant.git
+git clone https://github.com/openwebwork/WeBWorK_Vagrant.git
 cd WeBWorK_Vagrant
 git checkout -b packaged origin/packaged
-git clone https://github.com/<your-git-username>/webwork2.git
-git clone https://github.com/<your-git-username>/pg.git
+git clone https://github.com/openwebwork/webwork2.git
+git clone https://github.com/openwebwork/pg.git
 cd webwork2
 vagrant up
 ```
+
+* When you are done you have a WeBWorK set up using ubuntu 12 operating system.
+
+* To test the server type
+* http://localhost:8888/webwork2 into your browser
+* To login to your virtual machine on the command line use
+* `vagrant up`
+* `cd /opt/webwork/`
+* to get to the usual WeBWorK home directory.
+* you can switch versions of webwork from here by typing
+
+	cd webwork2
+	git branch
+
+and checkout the branches you wish to use. Remember to restart the server afterwards.
+    
+
+
 
 To set up a quick dev environment for WeBWorK:
+This is similar but might take a little longer since all of the components are loaded into the operating system (the vagrant box is "provisioned") from a script instead of being cached in a prebuilt box. 
 
 ```
-git clone https://github.com/whytheplatypus/WeBWorK_Vagrant.git
+git clone https://github.com/openwebwork/WeBWorK_Vagrant.git
 cd WeBWorK_Vagrant
-git clone https://github.com/<your-git-username>/webwork2.git
-git clone https://github.com/<your-git-username>/pg.git
+git clone https://github.com/openwebwork/webwork2.git
+git clone https://github.com/openwebwork/pg.git
 cd webwork2
 vagrant up
 ```
+* To test the server type
+* http://localhost:8888/webwork2 into your browser
+* To login to your virtual machine on the command line use
+* `vagrant up`
+* `cd /opt/webwork/`
+* to get to the usual WeBWorK home directory.
 
-The above assumes that you have forked webwork2 and pg on github.
-You can also clone from https://github.com/openwebwork (read-only).
 
 Information about installing vagrant can be found here: http://docs.vagrantup.com/v2/installation/index.html
 
