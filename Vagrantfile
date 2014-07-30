@@ -1,17 +1,19 @@
-Vagrant::Config.run do |config|
-    config.vm.define :webwork do |ww_config|
-        ww_config.vm.box = "precise32"
-        ww_config.vm.host_name = "wwdevbox"
-        ww_config.vm.box_url = "http://files.vagrantup.com/precise32.box"
-        ww_config.vm.provision :shell, :path => "vagrant/bootstrap.sh"
-        #ww_config.vm.customize ["modifyvm", :id, "--rtcuseutc", "on"]
-        ww_config.ssh.max_tries = 10
-        ww_config.vm.forward_port 80, 8888
-        ww_config.vm.forward_port 3306, 8889
-        ww_config.vm.forward_port 5432, 5433
-        ww_config.vm.host_name = "WeBWorK"
-        ww_config.vm.share_folder("webwork2", "/opt/webwork/webwork2", "./webwork2",  :extra => 'dmode=777,fmode=777')
-        ww_config.vm.share_folder("pg", "/opt/webwork/pg", "./pg",  :extra => 'dmode=777,fmode=777')
-        #ww_config.vm.provision :shell, :inline => "echo \"America/Denver\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
-    end
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+	config.vm.box = "ubuntu/trusty64"
+	config.vm.host_name = "WeBWorK"
+	# config.vm.provision "shell", path:  "vagrant/bootstrap.sh" # do this by hand
+	config.vm.network "forwarded_port", guest: 80, host: 8888
+	config.vm.network "forwarded_port", guest: 3306, host: 8889
+	config.vm.network "forwarded_port", guest: 5432, host: 5433
+	config.vm.synced_folder "webwork2", "/opt/webwork/webwork2",  mount_options: ['dmode=777','fmode=777']
+	config.vm.synced_folder "pg", "/opt/webwork/pg",  mount_options:  ['dmode=777','fmode=777']
+	config.vm.provider "virtualbox" do |v|
+	  v.memory = 1024
+	end
 end

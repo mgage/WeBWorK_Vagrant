@@ -1,9 +1,9 @@
-#llusr/bin/env bash
+#!/usr/bin/env bash
 apt-get -y update
 apt-get -y install apache2
 apt-get -y install apache2-mpm-prefork 
 apt-get -y install apache2.2-common 
-apt-get -y install libapreq2 
+apt-get -y install libapache2-mod-apreq2 
 apt-get -y install dvipng 
 apt-get -y install gcc 
 apt-get -y install perl 
@@ -45,18 +45,30 @@ apt-get -y install texlive
 apt-get -y install unzip
 apt-get -y install liblocal-lib-perl
 
-install CPAN
-reload cpan
-sudo cpan install Term::ReadPassword XML::Parser::EasyTree HTML::Template Iterator Iterator::Util Mail::Sender 
-mkdir /usr/include/apache2
-cpan install Apache2::SOAP
-a2enmod apreq
-apache2ctl restart
-
-debconf-set-selections <<< 'mysql-server-<version> mysql-server/root_password password root'
-debconf-set-selections <<< 'mysql-server-<version> mysql-server/root_password_again password root'
-apt-get -y install mysql-server
-
-perl /vagrant/vagrant/ww_install/ww_install.pl
-
-sudo service apache2 restart
+# sudo install CPAN
+# sudo reload cpan
+# sudo cpan install Term::ReadPassword 
+# sudo cpan install XML::Parser::EasyTree 
+# sudo cpan install HTML::Template 
+# sudo cpan install Iterator 
+# sudo cpan install Iterator::Util 
+# sudo cpan install Mail::Sender 
+# sudo cpan install Apache2::SOAP
+# sudo mkdir /usr/include/apache2
+# 
+# a2enmod apreq2
+# apache2ctl restart
+# 
+# echo "apache restarted"
+# 
+# #debconf-set-selections <<< 'mysql-server-<version> mysql-server/root_password password root'
+# #debconf-set-selections <<< 'mysql-server-<version> mysql-server/root_password_again password root'
+# apt-get -y install mysql-server
+# 
+# echo "Start ww_install script"
+# 
+# perl /vagrant/vagrant/ww_install/ww_install.pl
+# 
+# echo "Restart apache"
+# 
+# sudo service apache2 restart
